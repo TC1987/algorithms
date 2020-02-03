@@ -1,0 +1,54 @@
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+    let aIndex = a.length - 1;
+    let bIndex = b.length - 1;
+    let carry = 0;
+    let result = [];
+    let sum;
+    
+    while (aIndex >= 0 && bIndex >= 0) {
+        sum = parseInt(a[aIndex--]) + parseInt(b[bIndex--]) + carry;
+        
+        if (sum >= 2) {
+            result.unshift(sum - 2);
+            carry = 1;
+        } else {
+            result.unshift(sum);
+            carry = 0;
+        }
+    }
+    
+    while (aIndex >= 0) {
+        sum = parseInt(a[aIndex--]) + carry;
+        
+        if (sum >= 2) {
+            result.unshift(sum - 2);
+            carry = 1;
+        } else {
+            result.unshift(sum);
+            carry = 0;
+        }
+    }
+    
+    while (bIndex >= 0) {
+        sum = parseInt(b[bIndex--]) + carry;
+        
+        if (sum >= 2) {
+            result.unshift(sum - 2);
+            carry = 1;
+        } else {
+            result.unshift(sum);
+            carry = 0;
+        }
+    }
+    
+    if (carry) {
+        result.unshift(1);    
+    }
+    
+    return result.join('');
+};
